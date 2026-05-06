@@ -76,7 +76,9 @@
 
 ---
 
-## 📂 ساختار نهایی در مخزن شما
+##📂 ساختار نهایی در مخزن شما
+
+```
 downloads/
 ├── video/
 │   └── [Your_Custom_Name]/
@@ -96,6 +98,7 @@ downloads/
 └── other/
     └── Custom_File/
         └── Custom_File.7z.001
+```
 ---
 
 ## 💡 نکات مهم
