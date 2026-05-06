@@ -7,6 +7,11 @@ on:
         description: '🔗 لینک مستقیم فایل'
         required: true
         type: string
+      file_name:
+        description: '📛 نام فایل (بدون پسوند) - مثال: MyVideo یا پروژه_مهم'
+        required: true
+        type: string
+        default: 'downloaded_file'
       password:
         description: '🔐 رمز فایل فشرده (اختیاری)'
         required: false
@@ -19,7 +24,7 @@ on:
         default: '95m'
 
 permissions:
-  contents: write  # مهم: اجازه پوش به مخزن
+  contents: write
 
 jobs:
   download-and-commit:
@@ -42,18 +47,23 @@ jobs:
           if [ $? -ne 0 ]; then exit 1; fi
           ls -lh downloaded_file
 
-      - name: 🧠 تشخیص نوع و استخراج نام اصلی
+      - name: 🧠 تشخیص نوع فایل
         id: classify
         run: |
-          # نام اصلی از لینک
-          RAW_NAME=$(basename "${{ github.event.inputs.file_url }}" | sed 's/\?.*//' | sed 's/%20/ /g')
-          if [ -z "$RAW_NAME" ]; then RAW_NAME="unknown_file"; fi
-          # حذف کاراکترهای غیرمجاز برای نام پوشه (جایگزینی با _)
-          SAFE_NAME=$(echo "$RAW_NAME" | sed 's/[\\/:*?"<>|]/_/g')
-          # تشخیص MIME
+          # دریافت نام از ورودی کاربر
+          USER_NAME="${{ github.event.inputs.file_name }}"
+          
+          # پاکسازی نام از کاراکترهای غیرمجاز
+          SAFE_NAME=$(echo "$USER_NAME" | sed 's/[\\/:*?"<>|]/_/g' | sed 's/^[._-]*//' | sed 's/[._-]*$//')
+          
+          # اگر نام خالی شد از default استفاده کن
+          if [ -z "$SAFE_NAME" ]; then
+            SAFE_NAME="downloaded_file"
+          fi
+          
+          # تشخیص MIME نوع فایل
           MIME=$(file -b --mime-type downloaded_file)
-          EXT="${RAW_NAME##*.}"
-          EXT=$(echo "$EXT" | tr '[:upper:]' '[:lower:]')
+          EXT=$(echo "downloaded_file" | rev | cut -d. -f1 | rev | tr '[:upper:]' '[:lower:]')
           
           if [[ "$MIME" == video/* ]] || [[ "$EXT" =~ ^(mp4|mkv|avi|mov|wmv|flv|webm)$ ]]; then
             CAT="video"
@@ -69,22 +79,23 @@ jobs:
           
           echo "CAT=$CAT" >> $GITHUB_ENV
           echo "SAFE_NAME=$SAFE_NAME" >> $GITHUB_ENV
-          echo "✅ دسته: $CAT → زیرپوشه: $SAFE_NAME"
+          echo "✅ نام انتخاب شده: $SAFE_NAME"
+          echo "✅ دسته: $CAT"
 
       - name: 🗜️ فشرده‌سازی و تقسیم (با اعمال رمز)
         run: |
-          # پوشه نهایی: downloads/دسته/نام فایل/
+          # پوشه نهایی: downloads/دسته/نام انتخابی/
           FINAL_DIR="downloads/${{ env.CAT }}/${{ env.SAFE_NAME }}"
           mkdir -p "$FINAL_DIR"
           
-          # حذف فایل‌های قبلی در آن زیرپوشه (در صورت وجود) تا تداخل پیش نیاید
+          # حذف فایل‌های قبلی در آن زیرپوشه
           rm -f "$FINAL_DIR"/*.7z*
           
-          # فشرده‌سازی
+          # فشرده‌سازی با نام انتخابی کاربر
           if [ -z "${{ github.event.inputs.password }}" ]; then
-            7z a -mhe=on -mx=3 -v${{ github.event.inputs.split_size }} "$FINAL_DIR/archive.7z" "./downloaded_file"
+            7z a -mhe=on -mx=3 -v${{ github.event.inputs.split_size }} "$FINAL_DIR/${{ env.SAFE_NAME }}.7z" "./downloaded_file"
           else
-            7z a -p"${{ github.event.inputs.password }}" -mhe=on -mx=3 -v${{ github.event.inputs.split_size }} "$FINAL_DIR/archive.7z" "./downloaded_file"
+            7z a -p"${{ github.event.inputs.password }}" -mhe=on -mx=3 -v${{ github.event.inputs.split_size }} "$FINAL_DIR/${{ env.SAFE_NAME }}.7z" "./downloaded_file"
           fi
           
           echo "✅ فایل در $FINAL_DIR ذخیره شد"
@@ -95,5 +106,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add downloads/
-          git commit -m "Add downloaded file: ${{ env.SAFE_NAME }} (category: ${{ env.CAT }})" || echo "Nothing to commit"
+          git commit -m "Add: ${{ env.SAFE_NAME }} (category: ${{ env.CAT }})" || echo "Nothing to commit"
           git push
