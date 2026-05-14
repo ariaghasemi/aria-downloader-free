@@ -1,97 +1,2036 @@
-name: '📦 پیشرفته: دانلود چند فایل در چند پوشه'
+name: '📦 حرفه‌ای: حداکثر 10 فایل در 50 پوشه'
 
 on:
   workflow_dispatch:
     inputs:
-      folders_config:
-        description: |
-          📋 تنظیمات پوشه‌ها و فایل‌ها (فرمت JSON)
-          
-          مثال:
-          {
-            "پروژه_ویدیو": [
-              {"url": "https://example.com/video1.mp4", "name": "intro"},
-              {"url": "https://example.com/video2.mp4", "name": "main"}
-            ],
-            "مستندات": [
-              {"url": "https://example.com/doc1.pdf", "name": "guide"},
-              {"url": "https://example.com/doc2.pdf", "name": "appendix"}
-            ]
-          }
+      # پوشه 1
+      folder1_name:
+        description: '📁 نام پوشه 1'
         required: true
+        type: string
+      folder1_file1_url:
+        description: '🔗 پوشه1 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder1_file1_name:
+        description: '📛 پوشه1 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder1_file2_url:
+        description: '🔗 پوشه1 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder1_file2_name:
+        description: '📛 پوشه1 - نام فایل2'
+        required: false
+        type: string
+      folder1_file3_url:
+        description: '🔗 پوشه1 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder1_file3_name:
+        description: '📛 پوشه1 - نام فایل3'
+        required: false
+        type: string
+      folder1_file4_url:
+        description: '🔗 پوشه1 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder1_file4_name:
+        description: '📛 پوشه1 - نام فایل4'
+        required: false
+        type: string
+      folder1_file5_url:
+        description: '🔗 پوشه1 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder1_file5_name:
+        description: '📛 پوشه1 - نام فایل5'
+        required: false
+        type: string
+      folder1_file6_url:
+        description: '🔗 پوشه1 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder1_file6_name:
+        description: '📛 پوشه1 - نام فایل6'
+        required: false
+        type: string
+      folder1_file7_url:
+        description: '🔗 پوشه1 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder1_file7_name:
+        description: '📛 پوشه1 - نام فایل7'
+        required: false
+        type: string
+      folder1_file8_url:
+        description: '🔗 پوشه1 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder1_file8_name:
+        description: '📛 پوشه1 - نام فایل8'
+        required: false
+        type: string
+      folder1_file9_url:
+        description: '🔗 پوشه1 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder1_file9_name:
+        description: '📛 پوشه1 - نام فایل9'
+        required: false
+        type: string
+      folder1_file10_url:
+        description: '🔗 پوشه1 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder1_file10_name:
+        description: '📛 پوشه1 - نام فایل10'
+        required: false
+        type: string
+
+      # پوشه 2
+      folder2_name:
+        description: '📁 نام پوشه 2'
+        required: true
+        type: string
+      folder2_file1_url:
+        description: '🔗 پوشه2 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder2_file1_name:
+        description: '📛 پوشه2 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder2_file2_url:
+        description: '🔗 پوشه2 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder2_file2_name:
+        description: '📛 پوشه2 - نام فایل2'
+        required: false
+        type: string
+      folder2_file3_url:
+        description: '🔗 پوشه2 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder2_file3_name:
+        description: '📛 پوشه2 - نام فایل3'
+        required: false
+        type: string
+      folder2_file4_url:
+        description: '🔗 پوشه2 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder2_file4_name:
+        description: '📛 پوشه2 - نام فایل4'
+        required: false
+        type: string
+      folder2_file5_url:
+        description: '🔗 پوشه2 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder2_file5_name:
+        description: '📛 پوشه2 - نام فایل5'
+        required: false
+        type: string
+      folder2_file6_url:
+        description: '🔗 پوشه2 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder2_file6_name:
+        description: '📛 پوشه2 - نام فایل6'
+        required: false
+        type: string
+      folder2_file7_url:
+        description: '🔗 پوشه2 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder2_file7_name:
+        description: '📛 پوشه2 - نام فایل7'
+        required: false
+        type: string
+      folder2_file8_url:
+        description: '🔗 پوشه2 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder2_file8_name:
+        description: '📛 پوشه2 - نام فایل8'
+        required: false
+        type: string
+      folder2_file9_url:
+        description: '🔗 پوشه2 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder2_file9_name:
+        description: '📛 پوشه2 - نام فایل9'
+        required: false
+        type: string
+      folder2_file10_url:
+        description: '🔗 پوشه2 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder2_file10_name:
+        description: '📛 پوشه2 - نام فایل10'
+        required: false
+        type: string
+
+      # پوشه 3
+      folder3_name:
+        description: '📁 نام پوشه 3'
+        required: true
+        type: string
+      folder3_file1_url:
+        description: '🔗 پوشه3 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder3_file1_name:
+        description: '📛 پوشه3 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder3_file2_url:
+        description: '🔗 پوشه3 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder3_file2_name:
+        description: '📛 پوشه3 - نام فایل2'
+        required: false
+        type: string
+      folder3_file3_url:
+        description: '🔗 پوشه3 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder3_file3_name:
+        description: '📛 پوشه3 - نام فایل3'
+        required: false
+        type: string
+      folder3_file4_url:
+        description: '🔗 پوشه3 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder3_file4_name:
+        description: '📛 پوشه3 - نام فایل4'
+        required: false
+        type: string
+      folder3_file5_url:
+        description: '🔗 پوشه3 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder3_file5_name:
+        description: '📛 پوشه3 - نام فایل5'
+        required: false
+        type: string
+      folder3_file6_url:
+        description: '🔗 پوشه3 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder3_file6_name:
+        description: '📛 پوشه3 - نام فایل6'
+        required: false
+        type: string
+      folder3_file7_url:
+        description: '🔗 پوشه3 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder3_file7_name:
+        description: '📛 پوشه3 - نام فایل7'
+        required: false
+        type: string
+      folder3_file8_url:
+        description: '🔗 پوشه3 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder3_file8_name:
+        description: '📛 پوشه3 - نام فایل8'
+        required: false
+        type: string
+      folder3_file9_url:
+        description: '🔗 پوشه3 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder3_file9_name:
+        description: '📛 پوشه3 - نام فایل9'
+        required: false
+        type: string
+      folder3_file10_url:
+        description: '🔗 پوشه3 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder3_file10_name:
+        description: '📛 پوشه3 - نام فایل10'
+        required: false
+        type: string
+
+      # پوشه 4
+      folder4_name:
+        description: '📁 نام پوشه 4'
+        required: true
+        type: string
+      folder4_file1_url:
+        description: '🔗 پوشه4 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder4_file1_name:
+        description: '📛 پوشه4 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder4_file2_url:
+        description: '🔗 پوشه4 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder4_file2_name:
+        description: '📛 پوشه4 - نام فایل2'
+        required: false
+        type: string
+      folder4_file3_url:
+        description: '🔗 پوشه4 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder4_file3_name:
+        description: '📛 پوشه4 - نام فایل3'
+        required: false
+        type: string
+      folder4_file4_url:
+        description: '🔗 پوشه4 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder4_file4_name:
+        description: '📛 پوشه4 - نام فایل4'
+        required: false
+        type: string
+      folder4_file5_url:
+        description: '🔗 پوشه4 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder4_file5_name:
+        description: '📛 پوشه4 - نام فایل5'
+        required: false
+        type: string
+      folder4_file6_url:
+        description: '🔗 پوشه4 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder4_file6_name:
+        description: '📛 پوشه4 - نام فایل6'
+        required: false
+        type: string
+      folder4_file7_url:
+        description: '🔗 پوشه4 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder4_file7_name:
+        description: '📛 پوشه4 - نام فایل7'
+        required: false
+        type: string
+      folder4_file8_url:
+        description: '🔗 پوشه4 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder4_file8_name:
+        description: '📛 پوشه4 - نام فایل8'
+        required: false
+        type: string
+      folder4_file9_url:
+        description: '🔗 پوشه4 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder4_file9_name:
+        description: '📛 پوشه4 - نام فایل9'
+        required: false
+        type: string
+      folder4_file10_url:
+        description: '🔗 پوشه4 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder4_file10_name:
+        description: '📛 پوشه4 - نام فایل10'
+        required: false
+        type: string
+
+      # پوشه 5
+      folder5_name:
+        description: '📁 نام پوشه 5'
+        required: true
+        type: string
+      folder5_file1_url:
+        description: '🔗 پوشه5 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder5_file1_name:
+        description: '📛 پوشه5 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder5_file2_url:
+        description: '🔗 پوشه5 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder5_file2_name:
+        description: '📛 پوشه5 - نام فایل2'
+        required: false
+        type: string
+      folder5_file3_url:
+        description: '🔗 پوشه5 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder5_file3_name:
+        description: '📛 پوشه5 - نام فایل3'
+        required: false
+        type: string
+      folder5_file4_url:
+        description: '🔗 پوشه5 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder5_file4_name:
+        description: '📛 پوشه5 - نام فایل4'
+        required: false
+        type: string
+      folder5_file5_url:
+        description: '🔗 پوشه5 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder5_file5_name:
+        description: '📛 پوشه5 - نام فایل5'
+        required: false
+        type: string
+      folder5_file6_url:
+        description: '🔗 پوشه5 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder5_file6_name:
+        description: '📛 پوشه5 - نام فایل6'
+        required: false
+        type: string
+      folder5_file7_url:
+        description: '🔗 پوشه5 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder5_file7_name:
+        description: '📛 پوشه5 - نام فایل7'
+        required: false
+        type: string
+      folder5_file8_url:
+        description: '🔗 پوشه5 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder5_file8_name:
+        description: '📛 پوشه5 - نام فایل8'
+        required: false
+        type: string
+      folder5_file9_url:
+        description: '🔗 پوشه5 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder5_file9_name:
+        description: '📛 پوشه5 - نام فایل9'
+        required: false
+        type: string
+      folder5_file10_url:
+        description: '🔗 پوشه5 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder5_file10_name:
+        description: '📛 پوشه5 - نام فایل10'
+        required: false
+        type: string
+
+      # پوشه 6
+      folder6_name:
+        description: '📁 نام پوشه 6'
+        required: true
+        type: string
+      folder6_file1_url:
+        description: '🔗 پوشه6 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder6_file1_name:
+        description: '📛 پوشه6 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder6_file2_url:
+        description: '🔗 پوشه6 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder6_file2_name:
+        description: '📛 پوشه6 - نام فایل2'
+        required: false
+        type: string
+      folder6_file3_url:
+        description: '🔗 پوشه6 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder6_file3_name:
+        description: '📛 پوشه6 - نام فایل3'
+        required: false
+        type: string
+      folder6_file4_url:
+        description: '🔗 پوشه6 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder6_file4_name:
+        description: '📛 پوشه6 - نام فایل4'
+        required: false
+        type: string
+      folder6_file5_url:
+        description: '🔗 پوشه6 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder6_file5_name:
+        description: '📛 پوشه6 - نام فایل5'
+        required: false
+        type: string
+      folder6_file6_url:
+        description: '🔗 پوشه6 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder6_file6_name:
+        description: '📛 پوشه6 - نام فایل6'
+        required: false
+        type: string
+      folder6_file7_url:
+        description: '🔗 پوشه6 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder6_file7_name:
+        description: '📛 پوشه6 - نام فایل7'
+        required: false
+        type: string
+      folder6_file8_url:
+        description: '🔗 پوشه6 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder6_file8_name:
+        description: '📛 پوشه6 - نام فایل8'
+        required: false
+        type: string
+      folder6_file9_url:
+        description: '🔗 پوشه6 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder6_file9_name:
+        description: '📛 پوشه6 - نام فایل9'
+        required: false
+        type: string
+      folder6_file10_url:
+        description: '🔗 پوشه6 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder6_file10_name:
+        description: '📛 پوشه6 - نام فایل10'
+        required: false
+        type: string
+
+      # پوشه 7
+      folder7_name:
+        description: '📁 نام پوشه 7'
+        required: true
+        type: string
+      folder7_file1_url:
+        description: '🔗 پوشه7 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder7_file1_name:
+        description: '📛 پوشه7 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder7_file2_url:
+        description: '🔗 پوشه7 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder7_file2_name:
+        description: '📛 پوشه7 - نام فایل2'
+        required: false
+        type: string
+      folder7_file3_url:
+        description: '🔗 پوشه7 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder7_file3_name:
+        description: '📛 پوشه7 - نام فایل3'
+        required: false
+        type: string
+      folder7_file4_url:
+        description: '🔗 پوشه7 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder7_file4_name:
+        description: '📛 پوشه7 - نام فایل4'
+        required: false
+        type: string
+      folder7_file5_url:
+        description: '🔗 پوشه7 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder7_file5_name:
+        description: '📛 پوشه7 - نام فایل5'
+        required: false
+        type: string
+      folder7_file6_url:
+        description: '🔗 پوشه7 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder7_file6_name:
+        description: '📛 پوشه7 - نام فایل6'
+        required: false
+        type: string
+      folder7_file7_url:
+        description: '🔗 پوشه7 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder7_file7_name:
+        description: '📛 پوشه7 - نام فایل7'
+        required: false
+        type: string
+      folder7_file8_url:
+        description: '🔗 پوشه7 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder7_file8_name:
+        description: '📛 پوشه7 - نام فایل8'
+        required: false
+        type: string
+      folder7_file9_url:
+        description: '🔗 پوشه7 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder7_file9_name:
+        description: '📛 پوشه7 - نام فایل9'
+        required: false
+        type: string
+      folder7_file10_url:
+        description: '🔗 پوشه7 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder7_file10_name:
+        description: '📛 پوشه7 - نام فایل10'
+        required: false
+        type: string
+
+      # پوشه 8
+      folder8_name:
+        description: '📁 نام پوشه 8'
+        required: true
+        type: string
+      folder8_file1_url:
+        description: '🔗 پوشه8 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder8_file1_name:
+        description: '📛 پوشه8 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder8_file2_url:
+        description: '🔗 پوشه8 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder8_file2_name:
+        description: '📛 پوشه8 - نام فایل2'
+        required: false
+        type: string
+      folder8_file3_url:
+        description: '🔗 پوشه8 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder8_file3_name:
+        description: '📛 پوشه8 - نام فایل3'
+        required: false
+        type: string
+      folder8_file4_url:
+        description: '🔗 پوشه8 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder8_file4_name:
+        description: '📛 پوشه8 - نام فایل4'
+        required: false
+        type: string
+      folder8_file5_url:
+        description: '🔗 پوشه8 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder8_file5_name:
+        description: '📛 پوشه8 - نام فایل5'
+        required: false
+        type: string
+      folder8_file6_url:
+        description: '🔗 پوشه8 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder8_file6_name:
+        description: '📛 پوشه8 - نام فایل6'
+        required: false
+        type: string
+      folder8_file7_url:
+        description: '🔗 پوشه8 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder8_file7_name:
+        description: '📛 پوشه8 - نام فایل7'
+        required: false
+        type: string
+      folder8_file8_url:
+        description: '🔗 پوشه8 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder8_file8_name:
+        description: '📛 پوشه8 - نام فایل8'
+        required: false
+        type: string
+      folder8_file9_url:
+        description: '🔗 پوشه8 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder8_file9_name:
+        description: '📛 پوشه8 - نام فایل9'
+        required: false
+        type: string
+      folder8_file10_url:
+        description: '🔗 پوشه8 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder8_file10_name:
+        description: '📛 پوشه8 - نام فایل10'
+        required: false
+        type: string
+
+      # پوشه 9
+      folder9_name:
+        description: '📁 نام پوشه 9'
+        required: true
+        type: string
+      folder9_file1_url:
+        description: '🔗 پوشه9 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder9_file1_name:
+        description: '📛 پوشه9 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder9_file2_url:
+        description: '🔗 پوشه9 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder9_file2_name:
+        description: '📛 پوشه9 - نام فایل2'
+        required: false
+        type: string
+      folder9_file3_url:
+        description: '🔗 پوشه9 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder9_file3_name:
+        description: '📛 پوشه9 - نام فایل3'
+        required: false
+        type: string
+      folder9_file4_url:
+        description: '🔗 پوشه9 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder9_file4_name:
+        description: '📛 پوشه9 - نام فایل4'
+        required: false
+        type: string
+      folder9_file5_url:
+        description: '🔗 پوشه9 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder9_file5_name:
+        description: '📛 پوشه9 - نام فایل5'
+        required: false
+        type: string
+      folder9_file6_url:
+        description: '🔗 پوشه9 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder9_file6_name:
+        description: '📛 پوشه9 - نام فایل6'
+        required: false
+        type: string
+      folder9_file7_url:
+        description: '🔗 پوشه9 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder9_file7_name:
+        description: '📛 پوشه9 - نام فایل7'
+        required: false
+        type: string
+      folder9_file8_url:
+        description: '🔗 پوشه9 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder9_file8_name:
+        description: '📛 پوشه9 - نام فایل8'
+        required: false
+        type: string
+      folder9_file9_url:
+        description: '🔗 پوشه9 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder9_file9_name:
+        description: '📛 پوشه9 - نام فایل9'
+        required: false
+        type: string
+      folder9_file10_url:
+        description: '🔗 پوشه9 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder9_file10_name:
+        description: '📛 پوشه9 - نام فایل10'
+        required: false
+        type: string
+
+      # پوشه 10
+      folder10_name:
+        description: '📁 نام پوشه 10'
+        required: true
+        type: string
+      folder10_file1_url:
+        description: '🔗 پوشه10 - فایل1 (اجباری)'
+        required: true
+        type: string
+      folder10_file1_name:
+        description: '📛 پوشه10 - نام فایل1 (اجباری)'
+        required: true
+        type: string
+      folder10_file2_url:
+        description: '🔗 پوشه10 - فایل2 (اختیاری)'
+        required: false
+        type: string
+      folder10_file2_name:
+        description: '📛 پوشه10 - نام فایل2'
+        required: false
+        type: string
+      folder10_file3_url:
+        description: '🔗 پوشه10 - فایل3 (اختیاری)'
+        required: false
+        type: string
+      folder10_file3_name:
+        description: '📛 پوشه10 - نام فایل3'
+        required: false
+        type: string
+      folder10_file4_url:
+        description: '🔗 پوشه10 - فایل4 (اختیاری)'
+        required: false
+        type: string
+      folder10_file4_name:
+        description: '📛 پوشه10 - نام فایل4'
+        required: false
+        type: string
+      folder10_file5_url:
+        description: '🔗 پوشه10 - فایل5 (اختیاری)'
+        required: false
+        type: string
+      folder10_file5_name:
+        description: '📛 پوشه10 - نام فایل5'
+        required: false
+        type: string
+      folder10_file6_url:
+        description: '🔗 پوشه10 - فایل6 (اختیاری)'
+        required: false
+        type: string
+      folder10_file6_name:
+        description: '📛 پوشه10 - نام فایل6'
+        required: false
+        type: string
+      folder10_file7_url:
+        description: '🔗 پوشه10 - فایل7 (اختیاری)'
+        required: false
+        type: string
+      folder10_file7_name:
+        description: '📛 پوشه10 - نام فایل7'
+        required: false
+        type: string
+      folder10_file8_url:
+        description: '🔗 پوشه10 - فایل8 (اختیاری)'
+        required: false
+        type: string
+      folder10_file8_name:
+        description: '📛 پوشه10 - نام فایل8'
+        required: false
+        type: string
+      folder10_file9_url:
+        description: '🔗 پوشه10 - فایل9 (اختیاری)'
+        required: false
+        type: string
+      folder10_file9_name:
+        description: '📛 پوشه10 - نام فایل9'
+        required: false
+        type: string
+      folder10_file10_url:
+        description: '🔗 پوشه10 - فایل10 (اختیاری)'
+        required: false
+        type: string
+      folder10_file10_name:
+        description: '📛 پوشه10 - نام فایل10'
+        required: false
         type: string
 
 permissions:
   contents: write
 
 jobs:
-  download-multiple:
+  download:
     runs-on: ubuntu-latest
     steps:
-      - name: 🔄 دریافت کد مخزن
-        uses: actions/checkout@v4
-
-      - name: 📥 دانلود فایل‌ها بر اساس JSON
+      - uses: actions/checkout@v4
+      
+      - name: نصب ابزارهای مورد نیاز
         run: |
-          # نصب jq برای پردازش JSON
-          sudo apt-get install -y jq
-          
-          # خواندن JSON از ورودی
-          echo '${{ github.event.inputs.folders_config }}' > config.json
-          
-          # پردازش هر پوشه
-          for folder in $(jq -r 'keys[]' config.json); do
-            echo "========================================="
-            echo "📁 پردازش پوشه: $folder"
-            echo "========================================="
-            
-            # ایجاد پوشه
-            mkdir -p "downloads/$folder"
-            
-            # تعداد فایل‌های این پوشه
-            count=$(jq -r ".[\"$folder\"] | length" config.json)
-            echo "📄 تعداد فایل‌ها: $count"
-            
-            # دانلود هر فایل
-            for i in $(seq 0 $((count-1))); do
-              url=$(jq -r ".[\"$folder\"][$i].url" config.json)
-              name=$(jq -r ".[\"$folder\"][$i].name" config.json)
-              
-              echo "⬇️ دانلود: $name"
-              echo "🔗 لینک: $url"
-              
-              # تشخیص پسوند
-              curl -L --fail --retry 3 -o temp_file "$url"
-              
-              # بدست آوردن پسوند واقعی
-              mime=$(file -b --mime-type temp_file)
-              ext=""
-              case "$mime" in
-                video/mp4) ext="mp4" ;;
-                video/x-matroska) ext="mkv" ;;
-                audio/mpeg) ext="mp3" ;;
-                image/jpeg) ext="jpg" ;;
-                image/png) ext="png" ;;
-                application/pdf) ext="pdf" ;;
-                *) 
-                  ext=$(echo "$url" | rev | cut -d. -f1 | rev | tr '[:upper:]' '[:lower:]')
-                  if [ ${#ext} -gt 5 ]; then ext="bin"; fi
-                  ;;
-              esac
-              
-              # ذخیره با نام صحیح
-              final_name="downloads/$folder/${name}.${ext}"
-              mv temp_file "$final_name"
-              echo "✅ ذخیره شد: $final_name"
-              ls -lh "$final_name"
-              echo ""
-            done
-          done
+          sudo apt-get update
+          sudo apt-get install -y file
 
-      - name: 📝 کامیت و پوش به مخزن
+      - name: دانلود فایل‌های پوشه 1
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder1_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 1..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder1_file2_url }}" ] && [ -n "${{ github.event.inputs.folder1_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 1..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder1_file3_url }}" ] && [ -n "${{ github.event.inputs.folder1_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 1..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder1_file4_url }}" ] && [ -n "${{ github.event.inputs.folder1_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 1..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder1_file5_url }}" ] && [ -n "${{ github.event.inputs.folder1_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 1..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder1_file6_url }}" ] && [ -n "${{ github.event.inputs.folder1_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 1..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder1_file7_url }}" ] && [ -n "${{ github.event.inputs.folder1_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 1..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder1_file8_url }}" ] && [ -n "${{ github.event.inputs.folder1_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 1..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder1_file9_url }}" ] && [ -n "${{ github.event.inputs.folder1_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 1..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder1_file10_url }}" ] && [ -n "${{ github.event.inputs.folder1_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 1..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder1_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 1 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder1_name }}/"
+
+      - name: دانلود فایل‌های پوشه 2
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder2_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 2..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder2_file2_url }}" ] && [ -n "${{ github.event.inputs.folder2_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 2..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder2_file3_url }}" ] && [ -n "${{ github.event.inputs.folder2_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 2..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder2_file4_url }}" ] && [ -n "${{ github.event.inputs.folder2_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 2..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder2_file5_url }}" ] && [ -n "${{ github.event.inputs.folder2_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 2..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder2_file6_url }}" ] && [ -n "${{ github.event.inputs.folder2_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 2..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder2_file7_url }}" ] && [ -n "${{ github.event.inputs.folder2_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 2..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder2_file8_url }}" ] && [ -n "${{ github.event.inputs.folder2_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 2..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder2_file9_url }}" ] && [ -n "${{ github.event.inputs.folder2_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 2..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder2_file10_url }}" ] && [ -n "${{ github.event.inputs.folder2_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 2..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder2_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder2_name }}/${{ github.event.inputs.folder2_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 2 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder2_name }}/"
+
+      - name: دانلود فایل‌های پوشه 3
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder3_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 3..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder3_file2_url }}" ] && [ -n "${{ github.event.inputs.folder3_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 3..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder3_file3_url }}" ] && [ -n "${{ github.event.inputs.folder3_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 3..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder3_file4_url }}" ] && [ -n "${{ github.event.inputs.folder3_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 3..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder3_file5_url }}" ] && [ -n "${{ github.event.inputs.folder3_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 3..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder3_file6_url }}" ] && [ -n "${{ github.event.inputs.folder3_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 3..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder3_file7_url }}" ] && [ -n "${{ github.event.inputs.folder3_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 3..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder3_file8_url }}" ] && [ -n "${{ github.event.inputs.folder3_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 3..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder3_file9_url }}" ] && [ -n "${{ github.event.inputs.folder3_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 3..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder3_file10_url }}" ] && [ -n "${{ github.event.inputs.folder3_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 3..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder3_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder3_name }}/${{ github.event.inputs.folder3_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 3 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder3_name }}/"
+
+      - name: دانلود فایل‌های پوشه 4
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder4_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 4..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder4_file2_url }}" ] && [ -n "${{ github.event.inputs.folder4_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 4..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder4_file3_url }}" ] && [ -n "${{ github.event.inputs.folder4_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 4..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder4_file4_url }}" ] && [ -n "${{ github.event.inputs.folder4_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 4..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder4_file5_url }}" ] && [ -n "${{ github.event.inputs.folder4_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 4..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder4_file6_url }}" ] && [ -n "${{ github.event.inputs.folder4_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 4..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder4_file7_url }}" ] && [ -n "${{ github.event.inputs.folder4_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 4..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder4_file8_url }}" ] && [ -n "${{ github.event.inputs.folder4_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 4..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder4_file9_url }}" ] && [ -n "${{ github.event.inputs.folder4_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 4..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder4_file10_url }}" ] && [ -n "${{ github.event.inputs.folder4_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 4..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder4_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder4_name }}/${{ github.event.inputs.folder4_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 4 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder4_name }}/"
+
+      - name: دانلود فایل‌های پوشه 5
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder5_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 5..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder5_file2_url }}" ] && [ -n "${{ github.event.inputs.folder5_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 5..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder5_file3_url }}" ] && [ -n "${{ github.event.inputs.folder5_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 5..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder5_file4_url }}" ] && [ -n "${{ github.event.inputs.folder5_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 5..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder5_file5_url }}" ] && [ -n "${{ github.event.inputs.folder5_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 5..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder5_file6_url }}" ] && [ -n "${{ github.event.inputs.folder5_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 5..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder5_file7_url }}" ] && [ -n "${{ github.event.inputs.folder5_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 5..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder5_file8_url }}" ] && [ -n "${{ github.event.inputs.folder5_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 5..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder5_file9_url }}" ] && [ -n "${{ github.event.inputs.folder5_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 5..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder5_file10_url }}" ] && [ -n "${{ github.event.inputs.folder5_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 5..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder5_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder5_name }}/${{ github.event.inputs.folder5_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 5 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder5_name }}/"
+
+      - name: دانلود فایل‌های پوشه 6
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder6_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 6..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder6_file2_url }}" ] && [ -n "${{ github.event.inputs.folder6_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 6..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder6_file3_url }}" ] && [ -n "${{ github.event.inputs.folder6_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 6..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder6_file4_url }}" ] && [ -n "${{ github.event.inputs.folder6_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 6..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder6_file5_url }}" ] && [ -n "${{ github.event.inputs.folder6_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 6..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder6_file6_url }}" ] && [ -n "${{ github.event.inputs.folder6_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 6..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder6_file7_url }}" ] && [ -n "${{ github.event.inputs.folder6_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 6..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder6_file8_url }}" ] && [ -n "${{ github.event.inputs.folder6_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 6..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder6_file9_url }}" ] && [ -n "${{ github.event.inputs.folder6_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 6..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder6_file10_url }}" ] && [ -n "${{ github.event.inputs.folder6_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 6..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder6_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder6_name }}/${{ github.event.inputs.folder6_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 6 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder6_name }}/"
+
+      - name: دانلود فایل‌های پوشه 7
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder7_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 7..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder7_file2_url }}" ] && [ -n "${{ github.event.inputs.folder7_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 7..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder7_file3_url }}" ] && [ -n "${{ github.event.inputs.folder7_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 7..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder7_file4_url }}" ] && [ -n "${{ github.event.inputs.folder7_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 7..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder7_file5_url }}" ] && [ -n "${{ github.event.inputs.folder7_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 7..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder7_file6_url }}" ] && [ -n "${{ github.event.inputs.folder7_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 7..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder7_file7_url }}" ] && [ -n "${{ github.event.inputs.folder7_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 7..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder7_file8_url }}" ] && [ -n "${{ github.event.inputs.folder7_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 7..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder7_file9_url }}" ] && [ -n "${{ github.event.inputs.folder7_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 7..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder7_file10_url }}" ] && [ -n "${{ github.event.inputs.folder7_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 7..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder7_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder7_name }}/${{ github.event.inputs.folder7_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 7 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder7_name }}/"
+
+      - name: دانلود فایل‌های پوشه 8
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder8_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 8..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder8_file2_url }}" ] && [ -n "${{ github.event.inputs.folder8_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 8..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder8_file3_url }}" ] && [ -n "${{ github.event.inputs.folder8_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 8..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder8_file4_url }}" ] && [ -n "${{ github.event.inputs.folder8_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 8..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder8_file5_url }}" ] && [ -n "${{ github.event.inputs.folder8_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 8..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder8_file6_url }}" ] && [ -n "${{ github.event.inputs.folder8_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 8..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder8_file7_url }}" ] && [ -n "${{ github.event.inputs.folder8_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 8..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder8_file8_url }}" ] && [ -n "${{ github.event.inputs.folder8_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 8..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder8_file9_url }}" ] && [ -n "${{ github.event.inputs.folder8_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 8..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder8_file10_url }}" ] && [ -n "${{ github.event.inputs.folder8_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 8..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder8_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder8_name }}/${{ github.event.inputs.folder8_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 8 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder8_name }}/"
+
+      - name: دانلود فایل‌های پوشه 9
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder9_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 9..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder9_file2_url }}" ] && [ -n "${{ github.event.inputs.folder9_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 9..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder9_file3_url }}" ] && [ -n "${{ github.event.inputs.folder9_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 9..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder9_file4_url }}" ] && [ -n "${{ github.event.inputs.folder9_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 9..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder9_file5_url }}" ] && [ -n "${{ github.event.inputs.folder9_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 9..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder9_file6_url }}" ] && [ -n "${{ github.event.inputs.folder9_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 9..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder9_file7_url }}" ] && [ -n "${{ github.event.inputs.folder9_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 9..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder9_file8_url }}" ] && [ -n "${{ github.event.inputs.folder9_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 9..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder9_file9_url }}" ] && [ -n "${{ github.event.inputs.folder9_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 9..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder9_file10_url }}" ] && [ -n "${{ github.event.inputs.folder9_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 9..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder9_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder9_name }}/${{ github.event.inputs.folder9_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 9 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder9_name }}/"
+
+      - name: دانلود فایل‌های پوشه 10
+        run: |
+          mkdir -p "downloads/${{ github.event.inputs.folder10_name }}"
+          
+          # فایل 1 (اجباری)
+          echo "دانلود فایل 1 از پوشه 10..."
+          curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file1_url }}"
+          MIME=$(file -b --mime-type temp_file)
+          EXT=$(echo "$MIME" | cut -d'/' -f2)
+          if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+          mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file1_name }}.$EXT"
+          echo "✅ فایل 1 ذخیره شد"
+          
+          # فایل 2 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder10_file2_url }}" ] && [ -n "${{ github.event.inputs.folder10_file2_name }}" ]; then
+            echo "دانلود فایل 2 از پوشه 10..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file2_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file2_name }}.$EXT"
+            echo "✅ فایل 2 ذخیره شد"
+          fi
+          
+          # فایل 3 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder10_file3_url }}" ] && [ -n "${{ github.event.inputs.folder10_file3_name }}" ]; then
+            echo "دانلود فایل 3 از پوشه 10..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file3_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file3_name }}.$EXT"
+            echo "✅ فایل 3 ذخیره شد"
+          fi
+          
+          # فایل 4 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder10_file4_url }}" ] && [ -n "${{ github.event.inputs.folder10_file4_name }}" ]; then
+            echo "دانلود فایل 4 از پوشه 10..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file4_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file4_name }}.$EXT"
+            echo "✅ فایل 4 ذخیره شد"
+          fi
+          
+          # فایل 5 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder10_file5_url }}" ] && [ -n "${{ github.event.inputs.folder10_file5_name }}" ]; then
+            echo "دانلود فایل 5 از پوشه 10..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file5_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file5_name }}.$EXT"
+            echo "✅ فایل 5 ذخیره شد"
+          fi
+          
+          # فایل 6 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder10_file6_url }}" ] && [ -n "${{ github.event.inputs.folder10_file6_name }}" ]; then
+            echo "دانلود فایل 6 از پوشه 10..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file6_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file6_name }}.$EXT"
+            echo "✅ فایل 6 ذخیره شد"
+          fi
+          
+          # فایل 7 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder10_file7_url }}" ] && [ -n "${{ github.event.inputs.folder10_file7_name }}" ]; then
+            echo "دانلود فایل 7 از پوشه 10..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file7_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file7_name }}.$EXT"
+            echo "✅ فایل 7 ذخیره شد"
+          fi
+          
+          # فایل 8 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder10_file8_url }}" ] && [ -n "${{ github.event.inputs.folder10_file8_name }}" ]; then
+            echo "دانلود فایل 8 از پوشه 10..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file8_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file8_name }}.$EXT"
+            echo "✅ فایل 8 ذخیره شد"
+          fi
+          
+          # فایل 9 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder10_file9_url }}" ] && [ -n "${{ github.event.inputs.folder10_file9_name }}" ]; then
+            echo "دانلود فایل 9 از پوشه 10..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file9_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file9_name }}.$EXT"
+            echo "✅ فایل 9 ذخیره شد"
+          fi
+          
+          # فایل 10 (اختیاری)
+          if [ -n "${{ github.event.inputs.folder10_file10_url }}" ] && [ -n "${{ github.event.inputs.folder10_file10_name }}" ]; then
+            echo "دانلود فایل 10 از پوشه 10..."
+            curl -L --fail --retry 3 --retry-delay 2 -o temp_file "${{ github.event.inputs.folder10_file10_url }}"
+            MIME=$(file -b --mime-type temp_file)
+            EXT=$(echo "$MIME" | cut -d'/' -f2)
+            if [ "$EXT" = "octet-stream" ]; then EXT="bin"; fi
+            mv temp_file "downloads/${{ github.event.inputs.folder10_name }}/${{ github.event.inputs.folder10_file10_name }}.$EXT"
+            echo "✅ فایل 10 ذخیره شد"
+          fi
+          
+          echo "📁 دانلودهای پوشه 10 به پایان رسید"
+          ls -lh "downloads/${{ github.event.inputs.folder10_name }}/"
+
+      - name: Commit and Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add downloads/
-          git commit -m "Add multiple files and folders" || echo "Nothing to commit"
+          git commit -m "Download files to 10 folders" || echo "Nothing to commit"
           git push
