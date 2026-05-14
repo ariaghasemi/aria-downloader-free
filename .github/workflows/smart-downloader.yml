@@ -1,465 +1,50 @@
-name: '📦 دانلود چند فایل در چند پوشه'
+name: '📦 دانلود در یک پوشه'
 
 on:
   workflow_dispatch:
     inputs:
-      # پوشه 1 (اجباری)
-      folder1_name:
-        description: '📁 نام پوشه 1 (اجباری)'
+      folder_name:
+        description: '📁 نام پوشه (اجباری)'
         required: true
         type: string
-      folder1_file1_url:
-        description: '🔗 پوشه1 - فایل1 (اجباری)'
+      file1_url:
+        description: '🔗 فایل 1 (اجباری)'
         required: true
         type: string
-      folder1_file1_name:
-        description: '📛 پوشه1 - نام فایل1 (اجباری)'
+      file1_name:
+        description: '📛 نام فایل 1 (اجباری)'
         required: true
         type: string
-      folder1_file2_url:
-        description: '🔗 پوشه1 - فایل2 (اختیاری)'
+      file2_url:
+        description: '🔗 فایل 2 (اختیاری)'
         required: false
         type: string
-      folder1_file2_name:
-        description: '📛 پوشه1 - نام فایل2'
+      file2_name:
+        description: '📛 نام فایل 2'
         required: false
         type: string
-      folder1_file3_url:
-        description: '🔗 پوشه1 - فایل3 (اختیاری)'
+      file3_url:
+        description: '🔗 فایل 3 (اختیاری)'
         required: false
         type: string
-      folder1_file3_name:
-        description: '📛 پوشه1 - نام فایل3'
+      file3_name:
+        description: '📛 نام فایل 3'
         required: false
         type: string
-      folder1_file4_url:
-        description: '🔗 پوشه1 - فایل4 (اختیاری)'
+      file4_url:
+        description: '🔗 فایل 4 (اختیاری)'
         required: false
         type: string
-      folder1_file4_name:
-        description: '📛 پوشه1 - نام فایل4'
+      file4_name:
+        description: '📛 نام فایل 4'
         required: false
         type: string
-      folder1_file5_url:
-        description: '🔗 پوشه1 - فایل5 (اختیاری)'
+      file5_url:
+        description: '🔗 فایل 5 (اختیاری)'
         required: false
         type: string
-      folder1_file5_name:
-        description: '📛 پوشه1 - نام فایل5'
-        required: false
-        type: string
-
-      # پوشه 2 (اختیاری)
-      folder2_name:
-        description: '📁 نام پوشه 2 (اختیاری)'
-        required: false
-        type: string
-      folder2_file1_url:
-        description: '🔗 پوشه2 - فایل1'
-        required: false
-        type: string
-      folder2_file1_name:
-        description: '📛 پوشه2 - نام فایل1'
-        required: false
-        type: string
-      folder2_file2_url:
-        description: '🔗 پوشه2 - فایل2'
-        required: false
-        type: string
-      folder2_file2_name:
-        description: '📛 پوشه2 - نام فایل2'
-        required: false
-        type: string
-      folder2_file3_url:
-        description: '🔗 پوشه2 - فایل3'
-        required: false
-        type: string
-      folder2_file3_name:
-        description: '📛 پوشه2 - نام فایل3'
-        required: false
-        type: string
-      folder2_file4_url:
-        description: '🔗 پوشه2 - فایل4'
-        required: false
-        type: string
-      folder2_file4_name:
-        description: '📛 پوشه2 - نام فایل4'
-        required: false
-        type: string
-      folder2_file5_url:
-        description: '🔗 پوشه2 - فایل5'
-        required: false
-        type: string
-      folder2_file5_name:
-        description: '📛 پوشه2 - نام فایل5'
-        required: false
-        type: string
-
-      # پوشه 3 (اختیاری)
-      folder3_name:
-        description: '📁 نام پوشه 3 (اختیاری)'
-        required: false
-        type: string
-      folder3_file1_url:
-        description: '🔗 پوشه3 - فایل1'
-        required: false
-        type: string
-      folder3_file1_name:
-        description: '📛 پوشه3 - نام فایل1'
-        required: false
-        type: string
-      folder3_file2_url:
-        description: '🔗 پوشه3 - فایل2'
-        required: false
-        type: string
-      folder3_file2_name:
-        description: '📛 پوشه3 - نام فایل2'
-        required: false
-        type: string
-      folder3_file3_url:
-        description: '🔗 پوشه3 - فایل3'
-        required: false
-        type: string
-      folder3_file3_name:
-        description: '📛 پوشه3 - نام فایل3'
-        required: false
-        type: string
-      folder3_file4_url:
-        description: '🔗 پوشه3 - فایل4'
-        required: false
-        type: string
-      folder3_file4_name:
-        description: '📛 پوشه3 - نام فایل4'
-        required: false
-        type: string
-      folder3_file5_url:
-        description: '🔗 پوشه3 - فایل5'
-        required: false
-        type: string
-      folder3_file5_name:
-        description: '📛 پوشه3 - نام فایل5'
-        required: false
-        type: string
-
-      # پوشه 4 (اختیاری)
-      folder4_name:
-        description: '📁 نام پوشه 4 (اختیاری)'
-        required: false
-        type: string
-      folder4_file1_url:
-        description: '🔗 پوشه4 - فایل1'
-        required: false
-        type: string
-      folder4_file1_name:
-        description: '📛 پوشه4 - نام فایل1'
-        required: false
-        type: string
-      folder4_file2_url:
-        description: '🔗 پوشه4 - فایل2'
-        required: false
-        type: string
-      folder4_file2_name:
-        description: '📛 پوشه4 - نام فایل2'
-        required: false
-        type: string
-      folder4_file3_url:
-        description: '🔗 پوشه4 - فایل3'
-        required: false
-        type: string
-      folder4_file3_name:
-        description: '📛 پوشه4 - نام فایل3'
-        required: false
-        type: string
-      folder4_file4_url:
-        description: '🔗 پوشه4 - فایل4'
-        required: false
-        type: string
-      folder4_file4_name:
-        description: '📛 پوشه4 - نام فایل4'
-        required: false
-        type: string
-      folder4_file5_url:
-        description: '🔗 پوشه4 - فایل5'
-        required: false
-        type: string
-      folder4_file5_name:
-        description: '📛 پوشه4 - نام فایل5'
-        required: false
-        type: string
-
-      # پوشه 5 (اختیاری)
-      folder5_name:
-        description: '📁 نام پوشه 5 (اختیاری)'
-        required: false
-        type: string
-      folder5_file1_url:
-        description: '🔗 پوشه5 - فایل1'
-        required: false
-        type: string
-      folder5_file1_name:
-        description: '📛 پوشه5 - نام فایل1'
-        required: false
-        type: string
-      folder5_file2_url:
-        description: '🔗 پوشه5 - فایل2'
-        required: false
-        type: string
-      folder5_file2_name:
-        description: '📛 پوشه5 - نام فایل2'
-        required: false
-        type: string
-      folder5_file3_url:
-        description: '🔗 پوشه5 - فایل3'
-        required: false
-        type: string
-      folder5_file3_name:
-        description: '📛 پوشه5 - نام فایل3'
-        required: false
-        type: string
-      folder5_file4_url:
-        description: '🔗 پوشه5 - فایل4'
-        required: false
-        type: string
-      folder5_file4_name:
-        description: '📛 پوشه5 - نام فایل4'
-        required: false
-        type: string
-      folder5_file5_url:
-        description: '🔗 پوشه5 - فایل5'
-        required: false
-        type: string
-      folder5_file5_name:
-        description: '📛 پوشه5 - نام فایل5'
-        required: false
-        type: string
-
-      # پوشه 6 (اختیاری)
-      folder6_name:
-        description: '📁 نام پوشه 6 (اختیاری)'
-        required: false
-        type: string
-      folder6_file1_url:
-        description: '🔗 پوشه6 - فایل1'
-        required: false
-        type: string
-      folder6_file1_name:
-        description: '📛 پوشه6 - نام فایل1'
-        required: false
-        type: string
-      folder6_file2_url:
-        description: '🔗 پوشه6 - فایل2'
-        required: false
-        type: string
-      folder6_file2_name:
-        description: '📛 پوشه6 - نام فایل2'
-        required: false
-        type: string
-      folder6_file3_url:
-        description: '🔗 پوشه6 - فایل3'
-        required: false
-        type: string
-      folder6_file3_name:
-        description: '📛 پوشه6 - نام فایل3'
-        required: false
-        type: string
-      folder6_file4_url:
-        description: '🔗 پوشه6 - فایل4'
-        required: false
-        type: string
-      folder6_file4_name:
-        description: '📛 پوشه6 - نام فایل4'
-        required: false
-        type: string
-      folder6_file5_url:
-        description: '🔗 پوشه6 - فایل5'
-        required: false
-        type: string
-      folder6_file5_name:
-        description: '📛 پوشه6 - نام فایل5'
-        required: false
-        type: string
-
-      # پوشه 7 (اختیاری)
-      folder7_name:
-        description: '📁 نام پوشه 7 (اختیاری)'
-        required: false
-        type: string
-      folder7_file1_url:
-        description: '🔗 پوشه7 - فایل1'
-        required: false
-        type: string
-      folder7_file1_name:
-        description: '📛 پوشه7 - نام فایل1'
-        required: false
-        type: string
-      folder7_file2_url:
-        description: '🔗 پوشه7 - فایل2'
-        required: false
-        type: string
-      folder7_file2_name:
-        description: '📛 پوشه7 - نام فایل2'
-        required: false
-        type: string
-      folder7_file3_url:
-        description: '🔗 پوشه7 - فایل3'
-        required: false
-        type: string
-      folder7_file3_name:
-        description: '📛 پوشه7 - نام فایل3'
-        required: false
-        type: string
-      folder7_file4_url:
-        description: '🔗 پوشه7 - فایل4'
-        required: false
-        type: string
-      folder7_file4_name:
-        description: '📛 پوشه7 - نام فایل4'
-        required: false
-        type: string
-      folder7_file5_url:
-        description: '🔗 پوشه7 - فایل5'
-        required: false
-        type: string
-      folder7_file5_name:
-        description: '📛 پوشه7 - نام فایل5'
-        required: false
-        type: string
-
-      # پوشه 8 (اختیاری)
-      folder8_name:
-        description: '📁 نام پوشه 8 (اختیاری)'
-        required: false
-        type: string
-      folder8_file1_url:
-        description: '🔗 پوشه8 - فایل1'
-        required: false
-        type: string
-      folder8_file1_name:
-        description: '📛 پوشه8 - نام فایل1'
-        required: false
-        type: string
-      folder8_file2_url:
-        description: '🔗 پوشه8 - فایل2'
-        required: false
-        type: string
-      folder8_file2_name:
-        description: '📛 پوشه8 - نام فایل2'
-        required: false
-        type: string
-      folder8_file3_url:
-        description: '🔗 پوشه8 - فایل3'
-        required: false
-        type: string
-      folder8_file3_name:
-        description: '📛 پوشه8 - نام فایل3'
-        required: false
-        type: string
-      folder8_file4_url:
-        description: '🔗 پوشه8 - فایل4'
-        required: false
-        type: string
-      folder8_file4_name:
-        description: '📛 پوشه8 - نام فایل4'
-        required: false
-        type: string
-      folder8_file5_url:
-        description: '🔗 پوشه8 - فایل5'
-        required: false
-        type: string
-      folder8_file5_name:
-        description: '📛 پوشه8 - نام فایل5'
-        required: false
-        type: string
-
-      # پوشه 9 (اختیاری)
-      folder9_name:
-        description: '📁 نام پوشه 9 (اختیاری)'
-        required: false
-        type: string
-      folder9_file1_url:
-        description: '🔗 پوشه9 - فایل1'
-        required: false
-        type: string
-      folder9_file1_name:
-        description: '📛 پوشه9 - نام فایل1'
-        required: false
-        type: string
-      folder9_file2_url:
-        description: '🔗 پوشه9 - فایل2'
-        required: false
-        type: string
-      folder9_file2_name:
-        description: '📛 پوشه9 - نام فایل2'
-        required: false
-        type: string
-      folder9_file3_url:
-        description: '🔗 پوشه9 - فایل3'
-        required: false
-        type: string
-      folder9_file3_name:
-        description: '📛 پوشه9 - نام فایل3'
-        required: false
-        type: string
-      folder9_file4_url:
-        description: '🔗 پوشه9 - فایل4'
-        required: false
-        type: string
-      folder9_file4_name:
-        description: '📛 پوشه9 - نام فایل4'
-        required: false
-        type: string
-      folder9_file5_url:
-        description: '🔗 پوشه9 - فایل5'
-        required: false
-        type: string
-      folder9_file5_name:
-        description: '📛 پوشه9 - نام فایل5'
-        required: false
-        type: string
-
-      # پوشه 10 (اختیاری)
-      folder10_name:
-        description: '📁 نام پوشه 10 (اختیاری)'
-        required: false
-        type: string
-      folder10_file1_url:
-        description: '🔗 پوشه10 - فایل1'
-        required: false
-        type: string
-      folder10_file1_name:
-        description: '📛 پوشه10 - نام فایل1'
-        required: false
-        type: string
-      folder10_file2_url:
-        description: '🔗 پوشه10 - فایل2'
-        required: false
-        type: string
-      folder10_file2_name:
-        description: '📛 پوشه10 - نام فایل2'
-        required: false
-        type: string
-      folder10_file3_url:
-        description: '🔗 پوشه10 - فایل3'
-        required: false
-        type: string
-      folder10_file3_name:
-        description: '📛 پوشه10 - نام فایل3'
-        required: false
-        type: string
-      folder10_file4_url:
-        description: '🔗 پوشه10 - فایل4'
-        required: false
-        type: string
-      folder10_file4_name:
-        description: '📛 پوشه10 - نام فایل4'
-        required: false
-        type: string
-      folder10_file5_url:
-        description: '🔗 پوشه10 - فایل5'
-        required: false
-        type: string
-      folder10_file5_name:
-        description: '📛 پوشه10 - نام فایل5'
+      file5_name:
+        description: '📛 نام فایل 5'
         required: false
         type: string
 
@@ -472,71 +57,63 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: نصب ابزار مورد نیاز
+      - name: نصب ابزار
         run: sudo apt-get update && sudo apt-get install -y file
 
-      - name: دانلود پوشه 1 (اجباری)
+      - name: دانلود فایل‌ها
         run: |
-          mkdir -p "downloads/${{ github.event.inputs.folder1_name }}"
+          mkdir -p "downloads/${{ github.event.inputs.folder_name }}"
           
           # فایل 1 (اجباری)
-          curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.folder1_file1_url }}"
+          echo "دانلود فایل 1..."
+          curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file1_url }}"
           ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
           [ "$ext" = "octet-stream" ] && ext="bin"
-          mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${{ github.event.inputs.folder1_file1_name }}.$ext"
+          mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file1_name }}.$ext"
           
-          # فایل 2 تا 5 (اختیاری)
-          for i in 2 3 4 5; do
-            url_var="folder1_file${i}_url"
-            name_var="folder1_file${i}_name"
-            url="${!url_var}"
-            name="${!name_var}"
-            if [ -n "$url" ] && [ -n "$name" ]; then
-              curl -L --fail --retry 3 -o temp_file "$url"
-              ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
-              [ "$ext" = "octet-stream" ] && ext="bin"
-              mv temp_file "downloads/${{ github.event.inputs.folder1_name }}/${name}.$ext"
-            fi
-          done
+          # فایل 2
+          if [ -n "${{ github.event.inputs.file2_url }}" ] && [ -n "${{ github.event.inputs.file2_name }}" ]; then
+            echo "دانلود فایل 2..."
+            curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file2_url }}"
+            ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
+            [ "$ext" = "octet-stream" ] && ext="bin"
+            mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file2_name }}.$ext"
+          fi
           
-          ls -lh "downloads/${{ github.event.inputs.folder1_name }}/"
-
-      - name: دانلود پوشه 2 تا 10 (اختیاری)
-        run: |
-          for folder_num in 2 3 4 5 6 7 8 9 10; do
-            folder_name_var="folder${folder_num}_name"
-            folder_name="${!folder_name_var}"
-            
-            # اگر نام پوشه خالی بود، رد کن
-            if [ -z "$folder_name" ]; then
-              continue
-            fi
-            
-            mkdir -p "downloads/$folder_name"
-            
-            # دانلود فایل‌های 1 تا 5 این پوشه
-            for file_num in 1 2 3 4 5; do
-              url_var="folder${folder_num}_file${file_num}_url"
-              name_var="folder${folder_num}_file${file_num}_name"
-              url="${!url_var}"
-              name="${!name_var}"
-              
-              if [ -n "$url" ] && [ -n "$name" ]; then
-                echo "دانلود: $folder_name / $name"
-                curl -L --fail --retry 3 -o temp_file "$url"
-                ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
-                [ "$ext" = "octet-stream" ] && ext="bin"
-                mv temp_file "downloads/$folder_name/${name}.$ext"
-              fi
-            done
-            
-            ls -lh "downloads/$folder_name/"
-          done
+          # فایل 3
+          if [ -n "${{ github.event.inputs.file3_url }}" ] && [ -n "${{ github.event.inputs.file3_name }}" ]; then
+            echo "دانلود فایل 3..."
+            curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file3_url }}"
+            ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
+            [ "$ext" = "octet-stream" ] && ext="bin"
+            mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file3_name }}.$ext"
+          fi
+          
+          # فایل 4
+          if [ -n "${{ github.event.inputs.file4_url }}" ] && [ -n "${{ github.event.inputs.file4_name }}" ]; then
+            echo "دانلود فایل 4..."
+            curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file4_url }}"
+            ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
+            [ "$ext" = "octet-stream" ] && ext="bin"
+            mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file4_name }}.$ext"
+          fi
+          
+          # فایل 5
+          if [ -n "${{ github.event.inputs.file5_url }}" ] && [ -n "${{ github.event.inputs.file5_name }}" ]; then
+            echo "دانلود فایل 5..."
+            curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file5_url }}"
+            ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
+            [ "$ext" = "octet-stream" ] && ext="bin"
+            mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file5_name }}.$ext"
+          fi
+          
+          echo "✅ دانلودها تمام شد:"
+          ls -lh "downloads/${{ github.event.inputs.folder_name }}/"
 
       - name: Commit and Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add downloads/
-          git commit -m "Download files" || echo "Nothing to commit"
+          git commit -m "Add downloaded files" || echo "Nothing to commit"
           git push
