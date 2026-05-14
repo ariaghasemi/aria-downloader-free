@@ -66,54 +66,121 @@ jobs:
           
           # فایل 1 (اجباری)
           echo "دانلود فایل 1..."
-          curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file1_url }}"
-          ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
-          [ "$ext" = "octet-stream" ] && ext="bin"
-          mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file1_name }}.$ext"
+          curl -L --fail --retry 10 --retry-delay 10 --max-time 300 \
+            -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+            -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8" \
+            -H "Accept-Language: en-US,en;q=0.5" \
+            -H "Accept-Encoding: gzip, deflate, br" \
+            -H "Connection: keep-alive" \
+            -H "Upgrade-Insecure-Requests: 1" \
+            -H "Sec-Fetch-Dest: document" \
+            -H "Sec-Fetch-Mode: navigate" \
+            -H "Sec-Fetch-Site: none" \
+            -H "Sec-Fetch-User: ?1" \
+            -H "Cache-Control: max-age=0" \
+            -o temp_file "${{ github.event.inputs.file1_url }}"
+          
+          if [ $? -eq 0 ]; then
+            ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
+            [ "$ext" = "octet-stream" ] && ext="bin"
+            [ -z "$ext" ] && ext="bin"
+            mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file1_name }}.$ext"
+            echo "✅ فایل 1 ذخیره شد: ${{ github.event.inputs.file1_name }}.$ext"
+          else
+            echo "❌ فایل 1 دانلود نشد"
+            exit 1
+          fi
           
           # فایل 2
           if [ -n "${{ github.event.inputs.file2_url }}" ] && [ -n "${{ github.event.inputs.file2_name }}" ]; then
             echo "دانلود فایل 2..."
-            curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file2_url }}"
-            ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
-            [ "$ext" = "octet-stream" ] && ext="bin"
-            mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file2_name }}.$ext"
+            curl -L --fail --retry 10 --retry-delay 10 --max-time 300 \
+              -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+              -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
+              -H "Accept-Language: en-US,en;q=0.5" \
+              -o temp_file "${{ github.event.inputs.file2_url }}"
+            
+            if [ $? -eq 0 ]; then
+              ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
+              [ "$ext" = "octet-stream" ] && ext="bin"
+              [ -z "$ext" ] && ext="bin"
+              mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file2_name }}.$ext"
+              echo "✅ فایل 2 ذخیره شد: ${{ github.event.inputs.file2_name }}.$ext"
+            else
+              echo "⚠️ فایل 2 دانلود نشد (اختیاری، ادامه میدم)"
+            fi
           fi
           
           # فایل 3
           if [ -n "${{ github.event.inputs.file3_url }}" ] && [ -n "${{ github.event.inputs.file3_name }}" ]; then
             echo "دانلود فایل 3..."
-            curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file3_url }}"
-            ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
-            [ "$ext" = "octet-stream" ] && ext="bin"
-            mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file3_name }}.$ext"
+            curl -L --fail --retry 10 --retry-delay 10 --max-time 300 \
+              -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+              -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
+              -H "Accept-Language: en-US,en;q=0.5" \
+              -o temp_file "${{ github.event.inputs.file3_url }}"
+            
+            if [ $? -eq 0 ]; then
+              ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
+              [ "$ext" = "octet-stream" ] && ext="bin"
+              [ -z "$ext" ] && ext="bin"
+              mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file3_name }}.$ext"
+              echo "✅ فایل 3 ذخیره شد: ${{ github.event.inputs.file3_name }}.$ext"
+            else
+              echo "⚠️ فایل 3 دانلود نشد (اختیاری، ادامه میدم)"
+            fi
           fi
           
           # فایل 4
           if [ -n "${{ github.event.inputs.file4_url }}" ] && [ -n "${{ github.event.inputs.file4_name }}" ]; then
             echo "دانلود فایل 4..."
-            curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file4_url }}"
-            ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
-            [ "$ext" = "octet-stream" ] && ext="bin"
-            mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file4_name }}.$ext"
+            curl -L --fail --retry 10 --retry-delay 10 --max-time 300 \
+              -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+              -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
+              -H "Accept-Language: en-US,en;q=0.5" \
+              -o temp_file "${{ github.event.inputs.file4_url }}"
+            
+            if [ $? -eq 0 ]; then
+              ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
+              [ "$ext" = "octet-stream" ] && ext="bin"
+              [ -z "$ext" ] && ext="bin"
+              mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file4_name }}.$ext"
+              echo "✅ فایل 4 ذخیره شد: ${{ github.event.inputs.file4_name }}.$ext"
+            else
+              echo "⚠️ فایل 4 دانلود نشد (اختیاری، ادامه میدم)"
+            fi
           fi
           
           # فایل 5
           if [ -n "${{ github.event.inputs.file5_url }}" ] && [ -n "${{ github.event.inputs.file5_name }}" ]; then
             echo "دانلود فایل 5..."
-            curl -L --fail --retry 3 -o temp_file "${{ github.event.inputs.file5_url }}"
-            ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
-            [ "$ext" = "octet-stream" ] && ext="bin"
-            mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file5_name }}.$ext"
+            curl -L --fail --retry 10 --retry-delay 10 --max-time 300 \
+              -H "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+              -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
+              -H "Accept-Language: en-US,en;q=0.5" \
+              -o temp_file "${{ github.event.inputs.file5_url }}"
+            
+            if [ $? -eq 0 ]; then
+              ext=$(file -b --mime-type temp_file | cut -d'/' -f2)
+              [ "$ext" = "octet-stream" ] && ext="bin"
+              [ -z "$ext" ] && ext="bin"
+              mv temp_file "downloads/${{ github.event.inputs.folder_name }}/${{ github.event.inputs.file5_name }}.$ext"
+              echo "✅ فایل 5 ذخیره شد: ${{ github.event.inputs.file5_name }}.$ext"
+            else
+              echo "⚠️ فایل 5 دانلود نشد (اختیاری، ادامه میدم)"
+            fi
           fi
           
+          echo ""
+          echo "========================================="
           echo "✅ دانلودها تمام شد:"
           ls -lh "downloads/${{ github.event.inputs.folder_name }}/"
+          echo "========================================="
 
       - name: Commit and Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add downloads/
-          git commit -m "Add downloaded files" || echo "Nothing to commit"
+          git commit -m "Add downloaded files to ${{ github.event.inputs.folder_name }}" || echo "Nothing to commit"
           git push
