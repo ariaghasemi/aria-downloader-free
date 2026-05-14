@@ -1,4 +1,4 @@
-name: '📦 حرفه‌ای: دانلود و ذخیره در مخزن'
+name: '📦 ساده: دانلود مستقیم با فرمت اصلی'
 
 on:
   workflow_dispatch:
@@ -12,16 +12,6 @@ on:
         required: true
         type: string
         default: 'downloaded_file'
-      password:
-        description: '🔐 رمز فایل فشرده (اختیاری)'
-        required: false
-        type: string
-        default: ''
-      split_size:
-        description: '📦 حجم هر تکه (پیش‌فرض: 95m) مثال: 95m, 100m, 200m'
-        required: false
-        type: string
-        default: '95m'
 
 permissions:
   contents: write
@@ -33,21 +23,48 @@ jobs:
       - name: 🔄 دریافت کد مخزن
         uses: actions/checkout@v4
 
-      - name: ⚙️ نصب ابزارها
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y p7zip-full file
-
       - name: 📥 دانلود فایل
         id: download
         run: |
           URL="${{ github.event.inputs.file_url }}"
           echo "در حال دانلود از: $URL"
-          curl -L --fail --retry 5 --retry-delay 5 --progress-bar -o downloaded_file "$URL"
+          
+          # دانلود فایل با حفظ نام اصلی از لینک (اگر کاربر چیزی انتخاب نکرده)
+          curl -L --fail --retry 5 --retry-delay 5 --progress-bar -o original_file "$URL"
           if [ $? -ne 0 ]; then exit 1; fi
-          ls -lh downloaded_file
+          
+          # تشخیص پسوند واقعی فایل
+          MIME_TYPE=$(file -b --mime-type original_file)
+          EXT=""
+          
+          case "$MIME_TYPE" in
+            video/mp4) EXT="mp4" ;;
+            video/x-matroska) EXT="mkv" ;;
+            video/quicktime) EXT="mov" ;;
+            video/x-msvideo) EXT="avi" ;;
+            video/webm) EXT="webm" ;;
+            audio/mpeg) EXT="mp3" ;;
+            audio/wav) EXT="wav" ;;
+            audio/ogg) EXT="ogg" ;;
+            image/jpeg) EXT="jpg" ;;
+            image/png) EXT="png" ;;
+            image/gif) EXT="gif" ;;
+            application/pdf) EXT="pdf" ;;
+            text/plain) EXT="txt" ;;
+            application/zip) EXT="zip" ;;
+            *) 
+              # تلاش برای گرفتن پسوند از URL
+              EXT=$(echo "$URL" | rev | cut -d. -f1 | rev | tr '[:upper:]' '[:lower:]')
+              if [ ${#EXT} -gt 5 ] || [ "$EXT" = "$URL" ]; then
+                EXT="bin"
+              fi
+              ;;
+          esac
+          
+          echo "EXT=$EXT" >> $GITHUB_ENV
+          echo "✅ پسوند تشخیص داده شده: $EXT"
 
-      - name: 🧠 تشخیص نوع فایل
+      - name: 🧠 پاکسازی نام فایل
         id: classify
         run: |
           # دریافت نام از ورودی کاربر
@@ -61,50 +78,49 @@ jobs:
             SAFE_NAME="downloaded_file"
           fi
           
-          # تشخیص MIME نوع فایل
-          MIME=$(file -b --mime-type downloaded_file)
-          EXT=$(echo "downloaded_file" | rev | cut -d. -f1 | rev | tr '[:upper:]' '[:lower:]')
+          # تشخیص دسته بر اساس پسوند
+          EXT="${{ env.EXT }}"
+          case "$EXT" in
+            mp4|mkv|avi|mov|wmv|flv|webm) CAT="video" ;;
+            mp3|wav|ogg|flac|m4a) CAT="audio" ;;
+            jpg|jpeg|png|gif|bmp|webp) CAT="image" ;;
+            pdf|doc|docx|xls|xlsx|ppt|pptx) CAT="document" ;;
+            txt|md|json|xml|yaml) CAT="text" ;;
+            zip|rar|7z|tar|gz) CAT="archive" ;;
+            *) CAT="other" ;;
+          esac
           
-          if [[ "$MIME" == video/* ]] || [[ "$EXT" =~ ^(mp4|mkv|avi|mov|wmv|flv|webm)$ ]]; then
-            CAT="video"
-          elif [[ "$MIME" == audio/* ]] || [[ "$EXT" =~ ^(mp3|wav|ogg|flac|m4a)$ ]]; then
-            CAT="audio"
-          elif [[ "$MIME" == image/* ]] || [[ "$EXT" =~ ^(jpg|jpeg|png|gif|bmp|webp)$ ]]; then
-            CAT="image"
-          elif [[ "$MIME" == application/pdf ]] || [[ "$EXT" =~ ^(pdf|doc|docx|xls|xlsx|ppt|pptx|txt)$ ]]; then
-            CAT="document"
-          else
-            CAT="other"
-          fi
-          
-          echo "CAT=$CAT" >> $GITHUB_ENV
           echo "SAFE_NAME=$SAFE_NAME" >> $GITHUB_ENV
+          echo "CAT=$CAT" >> $GITHUB_ENV
           echo "✅ نام انتخاب شده: $SAFE_NAME"
           echo "✅ دسته: $CAT"
+          echo "✅ فرمت نهایی: $SAFE_NAME.$EXT"
 
-      - name: 🗜️ فشرده‌سازی و تقسیم (با اعمال رمز)
+      - name: 💾 ذخیره فایل با فرمت اصلی
         run: |
-          # پوشه نهایی: downloads/دسته/نام انتخابی/
-          FINAL_DIR="downloads/${{ env.CAT }}/${{ env.SAFE_NAME }}"
+          # پوشه نهایی: downloads/دسته/نام انتخابی.پسوند
+          FINAL_DIR="downloads/${{ env.CAT }}/"
           mkdir -p "$FINAL_DIR"
           
-          # حذف فایل‌های قبلی در آن زیرپوشه
-          rm -f "$FINAL_DIR"/*.7z*
+          # نام کامل فایل با پسوند
+          FINAL_FILE="$FINAL_DIR/${{ env.SAFE_NAME }}.${{ env.EXT }}"
           
-          # فشرده‌سازی با نام انتخابی کاربر
-          if [ -z "${{ github.event.inputs.password }}" ]; then
-            7z a -mhe=on -mx=3 -v${{ github.event.inputs.split_size }} "$FINAL_DIR/${{ env.SAFE_NAME }}.7z" "./downloaded_file"
-          else
-            7z a -p"${{ github.event.inputs.password }}" -mhe=on -mx=3 -v${{ github.event.inputs.split_size }} "$FINAL_DIR/${{ env.SAFE_NAME }}.7z" "./downloaded_file"
-          fi
+          # حذف فایل قبلی در صورت وجود
+          rm -f "$FINAL_FILE"
           
-          echo "✅ فایل در $FINAL_DIR ذخیره شد"
-          ls -lh "$FINAL_DIR"
+          # انتقال فایل دانلود شده به مقصد نهایی
+          mv original_file "$FINAL_FILE"
+          
+          echo "✅ فایل در $FINAL_FILE ذخیره شد"
+          ls -lh "$FINAL_FILE"
+          
+          # نمایش اطلاعات فایل
+          file "$FINAL_FILE"
 
       - name: 📝 کامیت و پوش به مخزن
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add downloads/
-          git commit -m "Add: ${{ env.SAFE_NAME }} (category: ${{ env.CAT }})" || echo "Nothing to commit"
+          git commit -m "Add: ${{ env.SAFE_NAME }}.${{ env.EXT }} (category: ${{ env.CAT }})" || echo "Nothing to commit"
           git push
